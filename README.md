@@ -21,13 +21,6 @@ Resources
 ### Installing
 
 This module should be called by a terraform environment configuration
-```  
-module "tfc-workspace" {
-  source  = "app.terraform.io/HashiCorp_AWS_Org/tfc-workspace/module"
-  version = "1.0.0"
-  # insert required variables here
-}
-```
 
 ##### Usage
 
@@ -49,6 +42,6 @@ module "tfc-workspace" {
 
 The following values are outputted
 ```
-    id                  = aws_security_group.instance.id
+    id                  = tfe_workspace.main.id
 ```
 
