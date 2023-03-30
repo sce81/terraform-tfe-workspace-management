@@ -26,7 +26,7 @@ This module should be called by a terraform environment configuration
 
 ```
     module "example_workspace" {
-      source           = "app.terraform.io/HashiCorp_AWS_Org/tfc-workspace/module"
+      source           = "app.terraform.io/YOURORG/tfc-workspace/module"
       version          = "1.0.0"
         name           = "tfc_workspace_example"
         organization   = var.org_name
