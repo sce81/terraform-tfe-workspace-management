@@ -34,17 +34,7 @@ variable "tfe_variables" {
 }
 
 variable "vcs_repo" {
-  type        = string
-  default     = null
-  description = "Github Repo to populate workspace with"
-}
-variable "github_app_id" {
-  type        = string
-  default     = null
-  description = "Github installation ID to use to access repo"
-}
-variable "git_branch" {
-  type        = string
-  default     = null
-  description = "branch of repo to pull"
+  type        = list(any)
+  default     = []
+  description = "VCS_Repo configuration parameters"
 }

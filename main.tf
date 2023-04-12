@@ -4,10 +4,14 @@ resource "tfe_workspace" "main" {
   tag_names    = var.workspace_tags
   project_id   = var.project_id
 
-  vcs_repo {
-    identifier     = var.vcs_repo
-    github_app_installation_id = var.github_app_id
-    branch         = var.git_branch
+
+  dynamic "vcs_repo" {
+    for_each = var.vcs_repo
+    content {
+      identifier                 = lookup(vcs_repo.value, "identifier", null)
+      github_app_installation_id = lookup(vcs_repo.value, "github_app_installation_id", null)
+      branch                     = lookup(vcs_repo.value, "branch", null)
+    }
   }
 }
 
