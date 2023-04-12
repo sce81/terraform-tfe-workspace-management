@@ -33,3 +33,18 @@ variable "tfe_variables" {
   default = {}
 }
 
+variable "vcs_repo" {
+  type        = string
+  default     = null
+  description = "Github Repo to populate workspace with"
+}
+variable "token_id" {
+  type        = string
+  default     = null
+  description = "Github token ID to use to access repo"
+}
+variable "git_branch" {
+  type        = string
+  default     = null
+  description = "branch of repo to pull"
+}
