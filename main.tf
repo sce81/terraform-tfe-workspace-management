@@ -3,6 +3,12 @@ resource "tfe_workspace" "main" {
   organization = var.organization
   tag_names    = var.workspace_tags
   project_id   = var.project_id
+
+  vcs_repo {
+    identifier     = var.vcs_repo
+    oauth_token_id = var.token_id
+    branch         = var.git_branch
+  }
 }
 
 resource "tfe_variable" "main" {
