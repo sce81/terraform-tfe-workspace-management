@@ -6,7 +6,7 @@ resource "tfe_workspace" "main" {
 
   vcs_repo {
     identifier     = var.vcs_repo
-    oauth_token_id = var.token_id
+    githugithub_app_installation_id = var.github_app_id
     branch         = var.git_branch
   }
 }

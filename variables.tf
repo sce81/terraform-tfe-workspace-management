@@ -38,10 +38,10 @@ variable "vcs_repo" {
   default     = null
   description = "Github Repo to populate workspace with"
 }
-variable "token_id" {
+variable "github_app_id" {
   type        = string
   default     = null
-  description = "Github token ID to use to access repo"
+  description = "Github installation ID to use to access repo"
 }
 variable "git_branch" {
   type        = string
