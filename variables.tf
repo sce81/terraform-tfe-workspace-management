@@ -28,8 +28,14 @@ variable "tfe_variables" {
       value       = optional(string)
       description = optional(string)
       category    = optional(string)
+      hcl         = optional(string)
       sensitive   = optional(bool) // it is a general recommendation to not deploy sensitive variables using terraform 
   }))
   default = {}
 }
 
+variable "vcs_repo" {
+  type        = list(any)
+  default     = []
+  description = "VCS_Repo configuration parameters"
+}

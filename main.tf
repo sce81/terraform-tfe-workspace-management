@@ -3,6 +3,16 @@ resource "tfe_workspace" "main" {
   organization = var.organization
   tag_names    = var.workspace_tags
   project_id   = var.project_id
+
+
+  dynamic "vcs_repo" {
+    for_each = var.vcs_repo
+    content {
+      identifier                 = lookup(vcs_repo.value, "identifier", null)
+      github_app_installation_id = lookup(vcs_repo.value, "github_app_installation_id", null)
+      branch                     = lookup(vcs_repo.value, "branch", null)
+    }
+  }
 }
 
 resource "tfe_variable" "main" {
