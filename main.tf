@@ -9,6 +9,7 @@ resource "tfe_workspace" "main" {
     for_each = var.vcs_repo
     content {
       identifier                 = lookup(vcs_repo.value, "identifier", null)
+      oauth_token_id             = lookup(vcs_repo.value, "oauth_token_id", null)
       github_app_installation_id = lookup(vcs_repo.value, "github_app_installation_id", null)
       branch                     = lookup(vcs_repo.value, "branch", null)
     }
