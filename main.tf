@@ -1,14 +1,17 @@
 resource "tfe_workspace" "main" {
-  name         = var.name
-  organization = var.organization
-  tag_names    = var.workspace_tags
-  project_id   = var.project_id
+  name                          = var.name
+  organization                  = var.organization
+  tag_names                     = var.workspace_tags
+  project_id                    = var.project_id
+  auto_apply                    = var.auto_apply
+  structured_run_output_enabled = var.structured_run_output_enabled
 
 
   dynamic "vcs_repo" {
     for_each = var.vcs_repo
     content {
       identifier                 = lookup(vcs_repo.value, "identifier", null)
+      oauth_token_id             = lookup(vcs_repo.value, "oauth_token_id", null)
       github_app_installation_id = lookup(vcs_repo.value, "github_app_installation_id", null)
       branch                     = lookup(vcs_repo.value, "branch", null)
     }

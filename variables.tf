@@ -39,3 +39,13 @@ variable "vcs_repo" {
   default     = []
   description = "VCS_Repo configuration parameters"
 }
+
+variable "auto_apply" {
+  type    = string
+  default = false
+}
+
+variable "structured_run_output_enabled" {
+  type    = string
+  default = false
+}
