@@ -1,3 +1,9 @@
 locals {
-      auto_apply = var.env_name != "production" ? true : false
+      auto_apply = contains(data.tfe_workspace.main.tag_names, "production") == true ? false : true
+}
+
+
+data "tfe_workspace" "main" {
+  name         = var.name
+  organization = var.organization
 }
