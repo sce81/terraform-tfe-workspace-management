@@ -1,8 +1,10 @@
 resource "tfe_workspace" "main" {
-  name         = var.name
-  organization = var.organization
-  tag_names    = var.workspace_tags
-  project_id   = var.project_id
+  name                          = var.name
+  organization                  = var.organization
+  tag_names                     = var.workspace_tags
+  project_id                    = var.project_id
+  auto_apply                    = var.auto_apply
+  structured_run_output_enabled = var.structured_run_output_enabled
 
 
   dynamic "vcs_repo" {
