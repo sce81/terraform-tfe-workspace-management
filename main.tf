@@ -3,7 +3,7 @@ resource "tfe_workspace" "main" {
   organization                  = var.organization
   tag_names                     = var.workspace_tags
   project_id                    = var.project_id
-  auto_apply                    = var.auto_apply
+  auto_apply                    = local.auto_apply
   structured_run_output_enabled = var.structured_run_output_enabled
 
 
