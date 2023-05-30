@@ -49,3 +49,10 @@ variable "structured_run_output_enabled" {
   type    = string
   default = false
 }
+
+variable "sentinel_policy" {
+  type = list(string)
+  default     = []
+  description = "List of Sentinel Policies to apply to this workspace"
+
+}
