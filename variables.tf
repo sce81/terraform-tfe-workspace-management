@@ -51,8 +51,14 @@ variable "structured_run_output_enabled" {
 }
 
 variable "sentinel_policy" {
-  type = list(string)
+  type        = list(string)
   default     = []
   description = "List of Sentinel Policies to apply to this workspace"
 
+}
+
+variable "terraform_version" {
+  type        = string
+  default     = null
+  description = "Optional override for workspace Terraform Version"
 }
