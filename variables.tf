@@ -57,6 +57,13 @@ variable "sentinel_policy" {
 
 }
 
+variable "variable_set" {
+  type        = list(string)
+  default     = []
+  description = "List of variable sets to apply to this workspace"
+
+}
+
 variable "terraform_version" {
   type        = string
   default     = null

@@ -7,7 +7,6 @@ resource "tfe_workspace" "main" {
   structured_run_output_enabled = var.structured_run_output_enabled
   terraform_version             = var.terraform_version
 
-
   dynamic "vcs_repo" {
     for_each = var.vcs_repo
     content {
@@ -34,4 +33,10 @@ resource "tfe_workspace_policy_set" "main" {
   count         = length(data.tfe_policy_set.main.*.id)
   policy_set_id = element(data.tfe_policy_set.main.*.id, count.index)
   workspace_id  = tfe_workspace.main.id
+}
+
+resource "tfe_workspace_variable_set" "main" {
+  count           = length(data.tfe_variable_set.main.*.id)
+  variable_set_id = element(data.tfe_variable_set.main.*.id, count.index)
+  workspace_id    = tfe_workspace.main.id
 }
