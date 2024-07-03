@@ -13,11 +13,13 @@ Resources
 
 ### Prerequisites
 
-    Terraform ~> 1.3.0
+    Terraform ~> 1.5.0
+    tfe_provider ~> 0.56
 
 ### Tested
 
-    Terraform ~> 1.3.7
+    Terraform ~> 1.9.0
+    tfe_provider ~> 0.56
 ### Installing
 
 This module should be called by a terraform environment configuration

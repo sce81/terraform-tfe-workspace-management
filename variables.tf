@@ -2,7 +2,11 @@ variable "name" {
   type        = string
   description = "Name of the variable within the workspace"
 }
-
+variable "description" {
+  type        = string
+  default     = null
+  description = "descrption of workspace purpose"
+}
 variable "project_id" {
   type        = string
   description = "Name of the project to assign the workspace to"
@@ -45,6 +49,12 @@ variable "auto_apply" {
   default = false
 }
 
+variable "auto_destroy_at" {
+  type        = string
+  description = "A future date/time string at which point all resources in a workspace will be scheduled for deletion. Must be a string in RFC3339 format (e.g. \"2100-01-01T00:00:00Z\")."
+  default     = null
+}
+
 variable "structured_run_output_enabled" {
   type    = string
   default = false
@@ -61,4 +71,16 @@ variable "terraform_version" {
   type        = string
   default     = null
   description = "Optional override for workspace Terraform Version"
+}
+
+variable "remote_state_workspaces" {
+  type        = list(string)
+  default     = []
+  description = "List of workspaces that can access the statefile belonging to this workspace"
+}
+
+variable "working_directory" {
+  type        = string
+  default     = null
+  description = "working directory to execute terraform within. defaults to root of workspace"
 }

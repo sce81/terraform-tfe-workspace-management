@@ -4,5 +4,5 @@ data "tfe_policy_set" "main" {
   organization = var.organization
 }
 locals {
-      auto_apply = contains(var.workspace_tags, "production") == true ? false : true
+  auto_apply = contains(var.workspace_tags, "production") == true ? false : true
 }
