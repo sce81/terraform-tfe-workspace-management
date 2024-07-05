@@ -38,6 +38,12 @@ variable "tfe_variables" {
   default = {}
 }
 
+variable "variable_set" {
+  type        = list(string)
+  default     = []
+  description = "List of policy sets to apply to this workspace"
+}
+
 variable "vcs_repo" {
   type        = list(any)
   default     = []
