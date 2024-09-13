@@ -1,5 +1,5 @@
 # Terraform Module for Terraform Cloud Workspace Management
-
+### All code is provided for reference purposes only and is used entirely at own risk. Code is for use in development environments only. Not intended for Production use.
 
 
 ## Getting Started
@@ -13,13 +13,13 @@ Resources
 
 ### Prerequisites
 
-    Terraform ~> 1.5.0
-    tfe_provider ~> 0.56
+    Terraform ~> 1.9.0
+    tfe_provider ~> 0.58
 
 ### Tested
 
     Terraform ~> 1.9.0
-    tfe_provider ~> 0.56
+    tfe_provider ~> 0.58
 ### Installing
 
 This module should be called by a terraform environment configuration

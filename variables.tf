@@ -55,7 +55,7 @@ variable "auto_apply" {
   default = false
 }
 
-variable "auto_destroy_at" {
+variable "auto_destroy_activity_duration" {
   type        = string
   description = "A future date/time string at which point all resources in a workspace will be scheduled for deletion. Must be a string in RFC3339 format (e.g. \"2100-01-01T00:00:00Z\")."
   default     = null
