@@ -7,10 +7,6 @@ resource "tfe_workspace" "main" {
   auto_apply                    = local.auto_apply
   structured_run_output_enabled = var.structured_run_output_enabled
   terraform_version             = var.terraform_version
-  auto_destroy_at               = var.auto_destroy_at
-  remote_state_consumer_ids     = var.remote_state_workspaces
-  working_directory             = var.working_directory
-
 
   dynamic "vcs_repo" {
     for_each = var.vcs_repo
@@ -36,11 +32,6 @@ resource "tfe_variable" "main" {
 
 resource "tfe_workspace_policy_set" "main" {
   count         = length(data.tfe_policy_set.main.*.id)
-  policy_set_id = element(data.tfe_policy_set.main.*.id, count.index)
-  workspace_id  = tfe_workspace.main.id
-}
-resource "tfe_workspace_policy_set" "main" {
-  count        = length(data.tfe_policy_set.main.*.id)
   policy_set_id = element(data.tfe_policy_set.main.*.id, count.index)
   workspace_id  = tfe_workspace.main.id
 }
