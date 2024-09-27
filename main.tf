@@ -1,15 +1,15 @@
 resource "tfe_workspace" "main" {
-  name                          = var.name
-  description                   = var.description
-  organization                  = var.organization
-  tag_names                     = var.workspace_tags
-  project_id                    = var.project_id
-  auto_apply                    = local.auto_apply
-  structured_run_output_enabled = var.structured_run_output_enabled
-  terraform_version             = var.terraform_version
-  auto_destroy_at               = var.auto_destroy_at
-  remote_state_consumer_ids     = var.remote_state_workspaces
-  working_directory             = var.working_directory
+  name                           = var.name
+  description                    = var.description
+  organization                   = var.organization
+  tag_names                      = var.workspace_tags
+  project_id                     = var.project_id
+  auto_apply                     = local.auto_apply
+  structured_run_output_enabled  = var.structured_run_output_enabled
+  terraform_version              = var.terraform_version
+  auto_destroy_activity_duration = var.auto_destroy_activity_duration
+  remote_state_consumer_ids      = var.remote_state_workspaces
+  working_directory              = var.working_directory
 
 
   dynamic "vcs_repo" {
