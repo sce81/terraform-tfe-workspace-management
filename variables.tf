@@ -80,7 +80,7 @@ variable "terraform_version" {
 }
 
 variable "remote_state_workspaces" {
-  type        = list(string)
+  type        = set(string)
   default     = []
   description = "List of workspaces that can access the statefile belonging to this workspace"
 }
