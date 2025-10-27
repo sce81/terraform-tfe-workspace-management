@@ -10,6 +10,7 @@ data "tfe_variable_set" "main" {
   organization = var.organization
 }
 
+
 locals {
   auto_apply = contains(var.workspace_tags, "production") == true ? false : true
 }
