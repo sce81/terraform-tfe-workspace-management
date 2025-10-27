@@ -14,12 +14,13 @@ Resources
 ### Prerequisites
 
     Terraform ~> 1.9.0
-    tfe_provider ~> 0.58
+    tfe_provider ~> 0.70
 
 ### Tested
 
     Terraform ~> 1.9.0
-    tfe_provider ~> 0.58
+    tfe_provider ~> 0.70
+    please note, not backwards compatible with older versions of the tfe provider. 
 ### Installing
 
 This module should be called by a terraform environment configuration
@@ -27,14 +28,26 @@ This module should be called by a terraform environment configuration
 ##### Usage
 
 ```
-    module "example_workspace" {
-      source           = "app.terraform.io/YOURORG/tfc-workspace/module"
-      version          = "1.0.0"
-        name           = "tfc_workspace_example"
-        organization   = var.org_name
-        tfe_variables  = local.dev_vars
-        project_id     = var.project_id
-        workspace_tags = ["tag1", "tag2", "tag3"]
+    module "TFC_Workspace_EC2_Deployments" {
+      for_each = local.workspace_vars.ec2_vars
+      source                         = "app.terraform.io//YOURORG/workspace-management/tfe"
+      version                        = "4.0.0"
+      name                           = "aws_workspace_ec2_${each.key}"
+      organization                   = data.tfe_organization.main.name
+      vcs_repo                       = local.ec2_instance
+      tfe_variables                  = each.value
+      project_id                     = tfe_project.deploy_ec2.id
+      structured_run_output_enabled  = "false"
+      variable_set                   = flatten([var.variable_sets])
+      terraform_version              = var.terraform_version
+      auto_destroy_activity_duration = var.auto_destroy_activity_duration
+      workspace_tags = {
+        "identifier" = each.key,
+        "platform"   = "aws",
+        "target"     = "ec2",
+        "project"    = tfe_project.deploy_ec2.name
+        "env"        = tostring(each.value.env.value)
+      }
     }
 ```
 
