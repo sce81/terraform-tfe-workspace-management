@@ -73,13 +73,6 @@ variable "sentinel_policy" {
 
 }
 
-variable "variable_set" {
-  type        = list(string)
-  default     = []
-  description = "List of variable sets to apply to this workspace"
-
-}
-
 variable "terraform_version" {
   type        = string
   default     = null
@@ -87,7 +80,7 @@ variable "terraform_version" {
 }
 
 variable "remote_state_workspaces" {
-  type        = list(string)
+  type        = set(string)
   default     = []
   description = "List of workspaces that can access the statefile belonging to this workspace"
 }
