@@ -19,9 +19,9 @@ variable "organization" {
 }
 
 variable "workspace_tags" {
-  type        = list(any)
-  default     = []
-  description = "List of tags to be assigned to the workspace"
+  type        = map(any)
+  default     = {}
+  description = "Map of tags to be assigned to the workspace"
 }
 
 variable "tfe_variables" {
@@ -89,4 +89,16 @@ variable "working_directory" {
   type        = string
   default     = null
   description = "working directory to execute terraform within. defaults to root of workspace"
+}
+
+variable "assessments_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether to regularly run health assessments such as drift detection on the workspace"
+}
+
+variable "global_remote_state" {
+  type        = bool
+  default     = false
+  description = "Whether the workspace allows all workspaces in the organization to access its state data during runs."
 }

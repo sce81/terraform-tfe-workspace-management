@@ -1,14 +1,12 @@
 resource "tfe_workspace" "main" {
-  name                           = var.name
-  description                    = var.description
-  organization                   = var.organization
-  tag_names                      = var.workspace_tags
-  project_id                     = var.project_id
-  auto_apply                     = local.auto_apply
+  name         = var.name
+  description  = var.description
+  organization = var.organization
+  project_id   = var.project_id
+
   structured_run_output_enabled  = var.structured_run_output_enabled
   terraform_version              = var.terraform_version
   auto_destroy_activity_duration = var.auto_destroy_activity_duration
-  remote_state_consumer_ids      = var.remote_state_workspaces
   working_directory              = var.working_directory
 
 
@@ -21,6 +19,17 @@ resource "tfe_workspace" "main" {
       branch                     = lookup(vcs_repo.value, "branch", null)
     }
   }
+}
+
+resource "tfe_workspace_settings" "main" {
+  workspace_id              = tfe_workspace.main.id
+  description               = var.description
+  auto_apply                = local.auto_apply
+  assessments_enabled       = var.assessments_enabled
+  global_remote_state       = var.global_remote_state
+  remote_state_consumer_ids = var.remote_state_workspaces
+
+  tags = var.workspace_tags
 }
 
 resource "tfe_variable" "main" {
@@ -38,4 +47,22 @@ resource "tfe_workspace_policy_set" "main" {
   count         = length(data.tfe_policy_set.main.*.id)
   policy_set_id = element(data.tfe_policy_set.main.*.id, count.index)
   workspace_id  = tfe_workspace.main.id
+}
+
+resource "tfe_workspace_run" "main" {
+  workspace_id = tfe_workspace.main.id
+
+  apply {
+    manual_confirm    = false
+    wait_for_run      = false
+    retry_attempts    = 5
+    retry_backoff_min = 5
+  }
+
+  destroy {
+    manual_confirm    = false
+    wait_for_run      = true
+    retry_attempts    = 3
+    retry_backoff_min = 10
+  }
 }

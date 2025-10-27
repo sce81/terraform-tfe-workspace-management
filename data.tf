@@ -11,5 +11,7 @@ data "tfe_variable_set" "main" {
 }
 
 locals {
-  auto_apply = contains(var.workspace_tags, "production") == true ? false : true
+  auto_apply_check = lookup(var.workspace_tags, "env", "production")
+  auto_apply       = local.auto_apply_check == "production" ? true : false
 }
+
