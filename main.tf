@@ -4,6 +4,7 @@ resource "tfe_workspace" "main" {
   organization = var.organization
   project_id   = var.project_id
 
+
   structured_run_output_enabled  = var.structured_run_output_enabled
   terraform_version              = var.terraform_version
   auto_destroy_activity_duration = var.auto_destroy_activity_duration
@@ -18,6 +19,9 @@ resource "tfe_workspace" "main" {
       github_app_installation_id = lookup(vcs_repo.value, "github_app_installation_id", null)
       branch                     = lookup(vcs_repo.value, "branch", null)
     }
+  }
+  lifecycle {
+    ignore_changes = [ ssh_key_id ]
   }
 }
 
@@ -49,20 +53,20 @@ resource "tfe_workspace_policy_set" "main" {
   workspace_id  = tfe_workspace.main.id
 }
 
-resource "tfe_workspace_run" "main" {
-  workspace_id = tfe_workspace.main.id
-
-  apply {
-    manual_confirm    = false
-    wait_for_run      = false
-    retry_attempts    = 5
-    retry_backoff_min = 5
-  }
-
-  destroy {
-    manual_confirm    = false
-    wait_for_run      = true
-    retry_attempts    = 3
-    retry_backoff_min = 10
-  }
-}
+//resource "tfe_workspace_run" "main" {
+//  workspace_id = tfe_workspace.main.id
+//
+//  apply {
+//    manual_confirm    = false
+//    wait_for_run      = false
+//    retry_attempts    = 5
+//    retry_backoff_min = 5
+//  }
+//
+//  destroy {
+//    manual_confirm    = false
+//    wait_for_run      = true
+//    retry_attempts    = 3
+//    retry_backoff_min = 10
+//  }
+//}

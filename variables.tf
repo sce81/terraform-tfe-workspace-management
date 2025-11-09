@@ -102,3 +102,9 @@ variable "global_remote_state" {
   default     = false
   description = "Whether the workspace allows all workspaces in the organization to access its state data during runs."
 }
+
+variable "ssh_key_name" {
+  type        = string
+  default     = null
+  description = "Name of SSH key to inject into Workspace - allows access to private GH repos"
+}

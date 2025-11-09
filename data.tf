@@ -10,8 +10,11 @@ data "tfe_variable_set" "main" {
   organization = var.organization
 }
 
+
+
+
 locals {
-  auto_apply_check = lookup(var.workspace_tags, "env", "production")
-  auto_apply       = local.auto_apply_check == "production" ? true : false
+  auto_apply_check = var.auto_apply == true ? "production" : lookup(var.workspace_tags, "env", "production")
+  auto_apply       = local.auto_apply_check == "production" ? false : true
 }
 
