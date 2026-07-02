@@ -21,7 +21,7 @@ resource "tfe_workspace" "main" {
     }
   }
   lifecycle {
-    ignore_changes = [ ssh_key_id ]
+    ignore_changes = [ssh_key_id]
   }
 }
 

@@ -64,13 +64,15 @@ The following values are outputted
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | >= 0.78.0 |
 
 ## Providers
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.78.0 |
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | >= 0.78.0 |
 
 ## Modules
 
@@ -83,7 +85,7 @@ No modules.
 | [tfe_variable.main](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) | resource |
 | [tfe_workspace.main](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace) | resource |
 | [tfe_workspace_policy_set.main](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_policy_set) | resource |
-| [tfe_workspace_variable_set.main](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set) | resource |
+| [tfe_workspace_settings.main](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_settings) | resource |
 | [tfe_policy_set.main](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/policy_set) | data source |
 | [tfe_variable_set.main](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/variable_set) | data source |
 
@@ -91,21 +93,29 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_assessments_enabled"></a> [assessments\_enabled](#input\_assessments\_enabled) | Whether to regularly run health assessments such as drift detection on the workspace | `bool` | `false` | no |
 | <a name="input_auto_apply"></a> [auto\_apply](#input\_auto\_apply) | n/a | `string` | `false` | no |
+| <a name="input_auto_destroy_activity_duration"></a> [auto\_destroy\_activity\_duration](#input\_auto\_destroy\_activity\_duration) | A future date/time string at which point all resources in a workspace will be scheduled for deletion. Must be a string in RFC3339 format (e.g. "2100-01-01T00:00:00Z"). | `string` | `null` | no |
+| <a name="input_description"></a> [description](#input\_description) | descrption of workspace purpose | `string` | `null` | no |
+| <a name="input_global_remote_state"></a> [global\_remote\_state](#input\_global\_remote\_state) | Whether the workspace allows all workspaces in the organization to access its state data during runs. | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the variable within the workspace | `string` | n/a | yes |
 | <a name="input_organization"></a> [organization](#input\_organization) | Name of the organisation to assign the varable to. | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Name of the project to assign the workspace to | `string` | `null` | no |
+| <a name="input_remote_state_workspaces"></a> [remote\_state\_workspaces](#input\_remote\_state\_workspaces) | List of workspaces that can access the statefile belonging to this workspace | `set(string)` | `[]` | no |
 | <a name="input_sentinel_policy"></a> [sentinel\_policy](#input\_sentinel\_policy) | List of Sentinel Policies to apply to this workspace | `list(string)` | `[]` | no |
+| <a name="input_ssh_key_name"></a> [ssh\_key\_name](#input\_ssh\_key\_name) | Name of SSH key to inject into Workspace - allows access to private GH repos | `string` | `null` | no |
 | <a name="input_structured_run_output_enabled"></a> [structured\_run\_output\_enabled](#input\_structured\_run\_output\_enabled) | n/a | `string` | `false` | no |
 | <a name="input_terraform_version"></a> [terraform\_version](#input\_terraform\_version) | Optional override for workspace Terraform Version | `string` | `null` | no |
 | <a name="input_tfe_variables"></a> [tfe\_variables](#input\_tfe\_variables) | Map of variable configuration | <pre>map(object(<br/>    {<br/>      key         = optional(string)<br/>      value       = optional(string)<br/>      description = optional(string)<br/>      category    = optional(string)<br/>      hcl         = optional(string)<br/>      sensitive   = optional(bool) // it is a general recommendation to not deploy sensitive variables using terraform <br/>  }))</pre> | `{}` | no |
-| <a name="input_variable_set"></a> [variable\_set](#input\_variable\_set) | List of variable sets to apply to this workspace | `list(string)` | `[]` | no |
+| <a name="input_variable_set"></a> [variable\_set](#input\_variable\_set) | List of policy sets to apply to this workspace | `list(string)` | `[]` | no |
 | <a name="input_vcs_repo"></a> [vcs\_repo](#input\_vcs\_repo) | VCS\_Repo configuration parameters | `list(any)` | `[]` | no |
-| <a name="input_workspace_tags"></a> [workspace\_tags](#input\_workspace\_tags) | List of tags to be assigned to the workspace | `list(any)` | `[]` | no |
+| <a name="input_working_directory"></a> [working\_directory](#input\_working\_directory) | working directory to execute terraform within. defaults to root of workspace | `string` | `null` | no |
+| <a name="input_workspace_tags"></a> [workspace\_tags](#input\_workspace\_tags) | Map of tags to be assigned to the workspace | `map(any)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 | ---- | ----------- |
 | <a name="output_id"></a> [id](#output\_id) | n/a |
+| <a name="output_rums"></a> [rums](#output\_rums) | n/a |
 <!-- END_TF_DOCS -->
